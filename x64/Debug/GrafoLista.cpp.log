@@ -1,0 +1,25 @@
+﻿  GrafoLista.cpp.cpp
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(28,1): error C2082: redefinição de parâmetro formal 'no'
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(27,1): message : ao compilar a função de membro 'No_t<T> *Grafo_t<T>::getNo(No_t<T> *)' do modelo da classe
+          with
+          [
+              T=std::string
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(67,12): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T>::getNo(No_t<T> *)' do modelo que está sendo compilada
+          with
+          [
+              T=std::string
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(62,26): message : consulte a referência à instanciação 'Grafo_t<std::string>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(28,15): error C2440: 'inicializando': não é possível converter de 'int' para 'No_t<T>'
+          with
+          [
+              T=std::string
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(28,15): message : Nenhum construtor pôde receber o tipo de origem, ou resolução de sobrecarga de construtor foi ambígua
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(32,17): error C2440: 'inicializando': não é possível converter de 'No_t<T> *' para 'No_t<T>'
+          with
+          [
+              T=std::string
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(32,17): message : Nenhum construtor pôde receber o tipo de origem, ou resolução de sobrecarga de construtor foi ambígua
