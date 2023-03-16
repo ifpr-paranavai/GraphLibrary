@@ -11,12 +11,14 @@ class Aresta_t {
 		double peso;
 		No_t<T> *noInicio;
 		No_t<T> *noFim;
+		T valor;
 
 	public:
-		Aresta_t(double peso, No_t<T> *noInicio, No_t<T> *noFim)
+		Aresta_t(double peso, No_t<T> *noInicio, No_t<T> *noFim, T& valor)
 		{
 			this->peso = peso;
 			this->noInicio = noInicio;
 			this->noFim = noFim;
+			this->valor = valor;
 		}
 };

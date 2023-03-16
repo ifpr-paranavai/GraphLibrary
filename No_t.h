@@ -21,12 +21,12 @@ class No_t {
 		list<Aresta_t<T>> arestasSaida;
 
 	public:
-		No_t(T valor)
+		No_t(T& valor)
 		{
 			this->valor = valor;
 		}
 
-		void setValor(T valor)
+		void setValor(T& valor)
 		{
 			this->valor = valor;
 		}

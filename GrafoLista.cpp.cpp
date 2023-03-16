@@ -1,4 +1,6 @@
 #include <iostream>
+#include <functional>
+#include <vector>
 #include <list>
 #include <algorithm>
 #include "No_t.h"
@@ -12,6 +14,8 @@ class Grafo_t {
 	private:
 		list< Aresta_t<T>* > arestas;
 		list< No_t<T>* > nos;
+		vector< list< No_t<T>* > > listaAdjacencia;
+
 
 	public:
 		Grafo_t()
@@ -19,52 +23,67 @@ class Grafo_t {
 
 		}
 
-		void adicionarNo(No_t<T>* no) {
+		No_t<T>* adicionarNo(T& valor) { 
+			No_t<T> *no = new No_t<T>(valor);
 			this->nos.push_back(no);
-		}
-
-		No_t<T>* getNo(No_t<T>* no) 
-		{
-			No_t<T> no = NULL;
-			auto it = this->nos.begin();
-			for (int i = 0; i < this->nos.size(); i++) 
-			{
-				No_t<T> aux = *std::next(it, i);
-				T valor = aux.getValor();
-				if (valor == no.getValor())
-				{
-					no = *std::next(it, i);
-					break;
-				}
-			}
-
+			adicionarNaListaAdjacencia(no);
 			return no;
 		}
 
-		void adicionarAresta(double peso, No_t<T>* noInicio, No_t<T>* noFim) {
-			No_t<T>* noInicioP = nullptr;
-			No_t<T>* noFimP = nullptr;
-			No_t<T> inicio = this->getNo(noInicio);
-			No_t<T> fim = this->getNo(noFim);
-			noInicioP = &inicio;
-			noFimP = &fim;
-			Aresta_t<T> aresta(peso, noInicioP, noFimP);
-			inicio.adicionarArestaSaida(aresta);
-			fim.adicionarArestaEntrada(aresta);
+		// Passar uma função lambda como parametro
+		No_t<T>* getNo(std::function<bool(No_t<T>&)> funcao) {
+			for (auto it = nos.begin(); it != nos.end(); ++it) {
+				if (funcao(*it)) {
+					return &(*it);
+				}
+			}
+			return nullptr;
+		}
+
+		void adicionarNaListaAdjacencia(No_t<T>* no) {
+			listaAdjacencia.push_back(list<No_t<T>*>());
+		}
+
+		Aresta_t<T>* adicionarAresta(double peso, No_t<T>* noInicio, No_t<T>* noFim, T& valor) {
+			Aresta_t<T> *aresta = new Aresta_t<T>(peso, noInicio, noFim, valor);
+			listaAdjacencia[noInicio].push_back(noFim);
+			listaAdjacencia[noFim].push_back(noInicio);
 			this->arestas.push_back(aresta);
+			return aresta;
+		}
+
+		void imprimirListaAdjacencia() {
+			for (int i = 0; i < listaAdjacencia.size(); i++) {
+				cout << "Nó " << i << ": ";
+				for (No_t<T>* no : listaAdjacencia[i]) {
+					cout << no->getValor() << " ";
+				}
+				cout << endl;
+			}
 		}
 };
 
 int main()
 {
 	setlocale(LC_ALL, "pt_BR.UTF-8");
+	Grafo_t<string> grafo;
 
-	Grafo_t<string> grafo = Grafo_t<string>();
-	No_t<string> *no = new No_t<string>("1");
+	string a = "A";
+	string b = "B";
+	string c = "C";
 
-	grafo.adicionarNo(no);
+	string ab = "A-B";
+	string ac = "A-C";
+	string bc = "B-C";
 
-	std::cout << grafo.getNo(no)->getValor();
+	No_t<string>* no1 = grafo.adicionarNo(a);
+	No_t<string>* no2 = grafo.adicionarNo(b);
+	No_t<string>* no3 = grafo.adicionarNo(c);
 
+	grafo.adicionarAresta(1.0, no1, no2, ab);
+	grafo.adicionarAresta(2.0, no1, no3, ac);
+	grafo.adicionarAresta(3.0, no2, no3, bc);
+
+	grafo.imprimirListaAdjacencia();
 
 }
