@@ -16,13 +16,14 @@ template <typename T>
 class No_t {
 
 	private:
+		int id;
 		T valor;
-		list<Aresta_t<T>> arestasEntrada;
-		list<Aresta_t<T>> arestasSaida;
+		list<Aresta_t<T>*> arestas;
 
 	public:
 		No_t(T& valor)
 		{
+			this->id = id;
 			this->valor = valor;
 		}
 
@@ -36,14 +37,18 @@ class No_t {
 			return this->valor;
 		}
 
-		void adicionarArestaEntrada(Aresta_t<T> aresta)
+		int getId() 
 		{
-			this->arestasEntrada.push_back(aresta);
+			return this->id;
 		}
 
-		void adicionarArestaSaida(Aresta_t<T> aresta)
+		void adicionarAresta(Aresta_t<T>* aresta)
 		{
-			this->arestasSaida.push_back(aresta);
+			this->arestas.push_back(aresta);
+		}
+
+		list<Aresta_t<T>*> getArestas() {
+			return this->arestas;
 		}
 
 };

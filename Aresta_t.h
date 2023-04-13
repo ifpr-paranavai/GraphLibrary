@@ -21,4 +21,12 @@ class Aresta_t {
 			this->noFim = noFim;
 			this->valor = valor;
 		}
+
+		No_t<T>* getNoInicio() {
+			return this->noInicio;
+		}
+
+		No_t<T>* getNoFim() {
+			return this->noFim;
+		}
 };
