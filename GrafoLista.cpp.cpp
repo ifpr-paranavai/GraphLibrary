@@ -62,9 +62,6 @@ class Grafo_t {
 				}
 			}
 
-			std::copy(matrizAdj.begin(), matrizAdj.end(), std::ostream_iterator<int>(std::cout, " "));
-			std::cout << std::endl;
-
 			for (int i = 0; i < numNos; i++) {
 				for (int j = 0; j < numNos; j++) {
 					if (i != j) {

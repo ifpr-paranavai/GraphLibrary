@@ -1,16 +1,14 @@
 ﻿  GrafoLista.cpp.cpp
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(47,1): warning C4267: 'inicializando': conversão de 'size_t' para 'int', possível perda de dados
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(46,1): message : ao compilar a função de membro 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo da classe
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(118,2): message : consulte a referência à instanciação 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(86,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,19): error C2131: a expressão não foi avaliada como uma constante
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,19): message : falha causada por uma leitura de uma variável fora de seu tempo de vida
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,19): message : consulte uso de 'numNos'
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(46,1): message : ao compilar a função de membro 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo da classe
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(124,2): message : consulte a referência à instanciação 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo que está sendo compilada
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(92,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,27): error C2131: a expressão não foi avaliada como uma constante
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,27): message : falha causada por uma leitura de uma variável fora de seu tempo de vida
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(48,27): message : consulte uso de 'numNos'
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(51,22): error C3863: o tipo de matriz 'char [numNos][numNos]' não é atribuível
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(64,50): error C3863: o tipo de matriz 'char [numNos][numNos]' não é atribuível
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(68,9): error C2672: 'std::copy': nenhuma função sobrecarregada correspondente encontrada
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xutility(3926,21): message : poderia ser '_OutIt std::copy(_InIt,_InIt,_OutIt)'
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(68,9): message : '_OutIt std::copy(_InIt,_InIt,_OutIt)': espera argumentos 3 - 2 fornecido
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(83,1): error C2036: 'char [numNos][numNos]': tamanho desconhecido
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(61,50): error C3863: o tipo de matriz 'char [numNos][numNos]' não é atribuível
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(77,1): error C2036: 'char [numNos][numNos]': tamanho desconhecido
