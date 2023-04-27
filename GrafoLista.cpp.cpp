@@ -65,10 +65,7 @@ class Grafo_t {
 
 			for (int i = 0; i < numNos; i++) {
 				for (int j = 0; j < numNos; j++) {
-					if (i != j) {
-						continue;
-					}
-					else if (matrizAdj[i][j] != 'S') {
+					if (matrizAdj[i][j] != 'S' && i != j) {
 						return false;
 					}
 				}
