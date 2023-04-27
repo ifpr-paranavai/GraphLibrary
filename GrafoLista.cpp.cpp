@@ -45,8 +45,9 @@ class Grafo_t {
 
 		bool verificarGrafoCompleto(Grafo_t<T, K>* grafo) {
 			int numNos = this->nos.size();
-			char matrizAdj[numNos][numNos];
+			char **matrizAdj = new char*[numNos];
 			for (int i = 0; i < numNos; i++) {
+				matrizAdj[i] = new char[numNos];
 				for (int j = 0; j < numNos; j++) {
 					matrizAdj[i][j] = 'N';
 				}
@@ -124,4 +125,4 @@ int main()
 
 	return 0;
 
-}
+} 
