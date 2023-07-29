@@ -73,8 +73,80 @@ class Grafo_t {
 
 			return true;
 		}
+		
+		double calcularDistancia(No_t<T>* no1, No_t<T>* no2) {
+			return 0.0;
+		}
+
+		void InsercaoDoMaisDistante() {
+			if (nos.empty()) {
+				cout << "O grafo está vazio." << endl;
+				return;
+			}
+
+			No_t<T>* pontoInicial = nos[0];
+			No_t<T>* pontoMaisDistante = nullptr;
+			double maiorDistancia = 0.0;
+
+			for (auto it = nos.begin(); it != nos.end(); it++) {
+				No_t<T>* noAtual = *it;
+				double distancia = calcularDistancia(pontoInicial, noAtual);
+
+				if (distancia > maiorDistancia) {
+					maiorDistancia = distancia;
+					pontoMaisDistante = noAtual;
+				}
+			}
+
+			if (pontoMaisDistante != nullptr) {
+				adicionarNo(pontoMaisDistante->getValor());
+				adicionarAresta(maiorDistancia, pontoInicial, pontoMaisDistante, pontoMaisDistante->getValor());
+			}
+		}
+
+		void VizinhoMaisProximo(Grafo_t<T, K> grafo, No_t<T> ponto_inicial) {
+			int i = 0;
+			if (nos.empty()) {
+				cout << "O grafo está vazio." << endl;
+				return;
+			}
+
+			vector<bool> visitados(nos.size(), false);
+			int numNosVisitados = 0;
+
+			visitados[ponto_inicial->getId()] = true;
+			numNosVisitados++;
+
+			while (numNosVisitados < nos.size()) {
+				int menorPeso = numeric_limits<int>::max();
+				int indiceMenorPeso = -1;
+
+				for (int i = 0; i < nos.size(); i++) {
+					if (visitados[i]) {
+						No_t<T>* noAtual = nos[i];
+						list<Aresta_t<K>*> arestas = noAtual->getArestas();
+
+						for (auto it = arestas.begin(); it != arestas.end(); it++) {
+							Aresta_t<K>* aresta = *it;
+							No_t<T>* noDestino = aresta->getNoFim();
+
+							if (!visitados[noDestino->getId()]) {
+								if (aresta->getPeso() < menorPeso) {
+									menorPeso = aresta->getPeso();
+									indiceMenorPeso = noDestino->getId();
+								}
+							}
+						}
+					}
+				}
+
+				visitados[indiceMenorPeso] = true;
+				numNosVisitados++;
+			}
+		}
 
 };
+
 
 int main()
 {
@@ -109,8 +181,6 @@ int main()
 	grafo.adicionarAresta(1, no4, no2, um);
 	grafo.adicionarAresta(1, no3, no4, um);
 	grafo.adicionarAresta(1, no4, no3, um);
-
-
 
 	// Verificando se o grafo é completo
 	if (grafo.verificarGrafoCompleto(&grafo)) {

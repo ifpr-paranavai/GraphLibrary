@@ -1,6 +1,6 @@
 ﻿  GrafoLista.cpp.cpp
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(47,1): warning C4267: 'inicializando': conversão de 'size_t' para 'int', possível perda de dados
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(46,1): message : ao compilar a função de membro 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo da classe
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(116,2): message : consulte a referência à instanciação 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo que está sendo compilada
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(84,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(186,2): message : consulte a referência à instanciação 'bool Grafo_t<int,int>::verificarGrafoCompleto(Grafo_t<int,int> *)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(156,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
   GrafoLista.cpp.vcxproj -> C:\Users\andre\source\repos\GrafoLista.cpp\x64\Debug\GrafoLista.cpp.exe
