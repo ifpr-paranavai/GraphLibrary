@@ -90,15 +90,27 @@ class Grafo_t {
 
 			for (auto it = nos.begin(); it != nos.end(); it++) {
 				No_t<T>* noAtual = *it;
-				double distancia = calcularDistancia(pontoInicial, noAtual);
+				if (noAtual != pontoInicial) {
+					list<Aresta_t<K>*> arestas = pontoInicial->getArestas();
 
-				if (distancia > maiorDistancia) {
-					maiorDistancia = distancia;
-					pontoMaisDistante = noAtual;
+					for (auto it2 = arestas.begin(); it2 != arestas.end(); it2++) {
+						Aresta_t<K>* aresta = *it2;
+						No_t<T>* noDestino = aresta->getNoFim();
+
+						if (noDestino == noAtual) {
+							double pesoAresta = aresta->getPeso();
+							if (pesoAresta > maiorDistancia) {
+								maiorDistancia = pesoAresta;
+								pontoMaisDistante = noAtual;
+							}
+							break;
+						}
+					}
 				}
 			}
 
 			if (pontoMaisDistante != nullptr) {
+				// Adiciona o ponto mais distante ao grafo
 				adicionarNo(pontoMaisDistante->getValor());
 				adicionarAresta(maiorDistancia, pontoInicial, pontoMaisDistante, pontoMaisDistante->getValor());
 			}
@@ -169,27 +181,30 @@ int main()
 	No_t<int>* no4 = grafo.adicionarNo(valor_no_4);
 
 	// Adicionando as arestas
-	grafo.adicionarAresta(1, no1, no2, um);
-	grafo.adicionarAresta(1, no2, no1, um);
-	grafo.adicionarAresta(1, no1, no3, um);
-	grafo.adicionarAresta(1, no3, no1, um);
-	grafo.adicionarAresta(1, no1, no4, um);
-	grafo.adicionarAresta(1, no4, no1, um);
-	grafo.adicionarAresta(1, no2, no3, um);
-	grafo.adicionarAresta(1, no3, no2, um);
-	grafo.adicionarAresta(1, no2, no4, um);
-	grafo.adicionarAresta(1, no4, no2, um);
-	grafo.adicionarAresta(1, no3, no4, um);
-	grafo.adicionarAresta(1, no4, no3, um);
+	grafo.adicionarAresta(10.0, no1, no2, um);
+	grafo.adicionarAresta(15.0, no2, no1, um);
+	grafo.adicionarAresta(20.0, no1, no3, um);
+	grafo.adicionarAresta(25.0, no3, no1, um);
+	grafo.adicionarAresta(12.0, no1, no4, um);
+	grafo.adicionarAresta(18.0, no4, no1, um);
+	grafo.adicionarAresta(22.0, no2, no3, um);
+	grafo.adicionarAresta(8.0, no3, no2, um);
+	grafo.adicionarAresta(13.0, no2, no4, um);
+	grafo.adicionarAresta(17.0, no4, no2, um);
+	grafo.adicionarAresta(2.0, no3, no4, um);
+	grafo.adicionarAresta(1.0, no4, no3, um);
 
-	// Verificando se o grafo é completo
-	if (grafo.verificarGrafoCompleto(&grafo)) {
-		cout << "O grafo e completo!" << endl;
+	// Imprimindo o caminho percorrido pelo algoritmo
+	cout << "Caminho percorrido pelo algoritmo do Vizinho Mais Próximo a partir de Cidade A:" << endl;
+	No_t<int>* noAtual = no1;
+	while (noAtual != nullptr) {
+		cout << noAtual->getValor();
+		//noAtual = noAtual->getProximo();
+		if (noAtual != nullptr) {
+			cout << " -> ";
+		}
 	}
-	else {
-		cout << "O grafo nao e completo!" << endl;
-	}
-
+	cout << endl;
 	return 0;
 
 } 
