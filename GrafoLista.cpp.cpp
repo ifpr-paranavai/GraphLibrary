@@ -74,6 +74,10 @@ class Grafo_t {
 			return true;
 		}
 		
+		double calcularDistancia(No_t<T>* no1, No_t<T>* no2) {
+			return 0.0;
+		}
+
 		void InsercaoDoMaisDistante() {
 			if (nos.empty()) {
 				cout << "O grafo está vazio." << endl;
@@ -154,51 +158,6 @@ class Grafo_t {
 			}
 		}
 
-		vector<int> VizinhoMaisProximo2(Grafo_t<T, K>& grafo, No_t<T>* ponto_inicial) {
-			vector<bool> visitados(grafo.nos.size(), false);
-			vector<int> caminho;
-			caminho.push_back(ponto_inicial->getId());
-			visitados[ponto_inicial->getId()] = true;
-
-			int numNosVisitados = 1;
-
-			while (numNosVisitados < grafo.nos.size()) {
-				int menorPeso = numeric_limits<int>::max();
-				int indiceMenorPeso = -1;
-
-				for (int i = 0; i < grafo.nos.size(); i++) {
-					if (visitados[i]) {
-						No_t<T>* noAtual = grafo.nos[i];
-						list<Aresta_t<K>*> arestas = noAtual->getArestas();
-
-						for (auto it = arestas.begin(); it != arestas.end(); it++) {
-							Aresta_t<K>* aresta = *it;
-							No_t<T>* noDestino = aresta->getNoFim();
-
-							if (!visitados[noDestino->getId()]) {
-								int pesoAresta = static_cast<int>(aresta->getPeso());
-								if (pesoAresta < menorPeso) {
-									menorPeso = pesoAresta;
-									indiceMenorPeso = noDestino->getId();
-								}
-							}
-						}
-					}
-				}
-
-				if (indiceMenorPeso != -1) {
-					visitados[indiceMenorPeso] = true;
-					caminho.push_back(indiceMenorPeso);
-					numNosVisitados++;
-				}
-				else {
-					break;
-				}
-			}
-
-			return caminho;
-		}
-
 };
 
 
@@ -236,19 +195,6 @@ int main()
 	grafo.adicionarAresta(2.0, no3, no4, um);
 	grafo.adicionarAresta(1.0, no4, no3, um);
 
-	grafo.VizinhoMaisProximo(grafo, *no1);
-	// Utilizando a função VizinhoMaisProximo
-	//vector<int> caminho = grafo.VizinhoMaisProximo2(grafo, no1);
-
-	// Imprimindo o caminho percorrido pelo algoritmo
-	/*cout << "Caminho percorrido pelo algoritmo do Vizinho Mais Próximo a partir de Cidade A:" << endl;
-	for (size_t i = 0; i < caminho.size(); i++) {
-		cout << caminho[i];
-		if (i != caminho.size() - 1) {
-			cout << " -> ";
-		}
-	}
-	cout << endl;*/
 	return 0;
 
 } 
