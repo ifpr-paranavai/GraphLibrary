@@ -29,4 +29,8 @@ class Aresta_t {
 		No_t<T>* getNoFim() {
 			return this->noFim;
 		}
+
+		double getPeso() {
+			return this->peso;
+		}
 };
