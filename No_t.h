@@ -21,18 +21,18 @@ class No_t {
 		list<Aresta_t<T>*> arestas;
 
 	public:
-		No_t(T& valor)
+		No_t(const T& valor, const int id)
 		{
 			this->id = id;
 			this->valor = valor;
 		}
 
-		void setValor(T& valor)
+		void setValor(const T& valor)
 		{
 			this->valor = valor;
 		}
 
-		T getValor()
+		T& getValor()
 		{
 			return this->valor;
 		}
@@ -47,8 +47,8 @@ class No_t {
 			this->arestas.push_back(aresta);
 		}
 
-		list<Aresta_t<T>*> getArestas() {
-			return this->arestas;
+		list<Aresta_t<T>*>* getArestas() {
+			return &this->arestas;
 		}
 
 };
