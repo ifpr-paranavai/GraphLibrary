@@ -5,10 +5,10 @@ C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(31,
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(226,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(259,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo que está sendo compilada
           with
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(216,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(249,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
   GrafoLista.cpp.vcxproj -> C:\Users\andre\source\repos\GrafoLista.cpp\x64\Debug\GrafoLista.cpp.exe

@@ -91,14 +91,47 @@ public:
 			No_t<T>* pontoInicial = grafo.nos[0];
 			std::vector<bool> noVisitado(grafo.quantidadeNosGrafo(), false);
 			No_t<T>* noAtual = pontoInicial;
+			double PesoArestaBuscar;
+			double custoAtual = DBL_MAX;
 
-			if (resultado->quantidadeNosGrafo() == grafo.quantidadeNosGrafo() - 1) {
-				// precisa adicionar a última aresta que liga o o último nó ao primeiro nó
-			}
-
+			
 			for (int i = 1; i < grafo.quantidadeNosGrafo(); i++) {
-				
+				list<Aresta_t<K>*>* arestas = noAtual->getArestas();
+				if (resultado->quantidadeNosGrafo() == grafo.quantidadeNosGrafo() - 1) {
+					// precisa adicionar a última aresta que liga o o último nó ao primeiro nó
+					for (auto it2 = noAtual->getArestas()->begin(); it2 != noAtual->getArestas()->end(); it2++) {
+						Aresta_t<K>* aresta = *it2;
+
+						if (aresta->getNoFim() == pontoInicial) {
+							PesoArestaBuscar = aresta->getPeso();
+						}
+						resultado->adicionarAresta(PesoArestaBuscar, noAtual, pontoInicial);
+						// precisa fazer calcular o custo, exemplo:
+						// custoAtual = calcularCusto(resultado)
+					}
+
+					if (custoAtual < melhorCaminho) {
+						melhorCaminho = custoAtual;
+					}
+					return;
+				}
 			}
+			
+			for (int i = 0; i < grafo.quantidadeNosGrafo(); i++) {
+				noAtual = grafo.nos[i];
+				if (!noVisitado[noAtual->getId()]) {
+					resultado->adicionarNo(grafo.nos[i]);
+					noVisitado[noAtual->getId()] = true;
+					//calcular limite superior
+
+					//se o limite superior < melhorCaminho 
+					//BranchAndBound(Grafo_t<T, K>& grafo) 
+
+				}
+			}
+
+			return resultado;
+
 		}
 
 		Grafo_t<T, K>* CaixeiroInsercaoDoMaisDistante(Grafo_t<T, K>& grafo) {
