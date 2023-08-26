@@ -3,10 +3,24 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <cassert>
 #include "No_t.h"
 #include "Aresta_t.h"
 
 using namespace std;
+
+#define DEBUG
+
+// ---------------------------------------------------
+
+#ifdef DEBUG
+	#define dprint(STR) { std::cout << STR; }
+	#define dprintln(STR) { std::cout << STR << std::endl; }
+#else
+	#define dprint(STR)
+	#define dprintln(STR)
+#endif
+
 
 template <typename T, typename K>
 class Grafo_t {
@@ -17,7 +31,7 @@ public:
 		
 
 	public:
-		list< Aresta* > arestas;
+		//list< Aresta* > arestas;
 		vector< No* > nos;
 		Grafo_t(int qtdeNos)
 		{
@@ -46,11 +60,13 @@ public:
 			return nullptr;
 		}
 
-		Aresta_t<K>* adicionarAresta(double peso, No_t<T>* noInicio, No_t<T>* noFim) {
+		void adicionarAresta(double peso, No_t<T>* noInicio, No_t<T>* noFim) {
 			Aresta_t<K> *aresta = new Aresta_t<K>(peso, noInicio, noFim);
 			noInicio->adicionarAresta(aresta);
-			this->arestas.push_back(aresta);
-			return aresta;
+			Aresta_t<K>* arestaInvertida = new Aresta_t<K>(peso, noFim, noInicio);
+			noFim->adicionarAresta(aresta);
+			//this->arestas.push_back(aresta);
+			//return aresta;
 		}
 
 		bool verificarGrafoCompleto(Grafo_t<T, K>* grafo) {
@@ -84,6 +100,7 @@ public:
 			return true;
 		}
 
+		#if 0
 		Grafo_t<T, K>* BranchAndBound(Grafo_t<T, K>& grafo) {
 			double melhorCaminho = DBL_MAX;
 
@@ -108,6 +125,9 @@ public:
 						resultado->adicionarAresta(PesoArestaBuscar, noAtual, pontoInicial);
 						// precisa fazer calcular o custo, exemplo:
 						// custoAtual = calcularCusto(resultado)
+						if (custoAtual < melhorCaminho) {
+							melhorCaminho = custoAtual;
+						}
 					}
 
 					if (custoAtual < melhorCaminho) {
@@ -133,59 +153,11 @@ public:
 			return resultado;
 
 		}
-
-		Grafo_t<T, K>* CaixeiroInsercaoDoMaisDistante(Grafo_t<T, K>& grafo) {
-			using Grafo = Grafo_t<T, K>;
-
-			Grafo_t<T, K>* resultado = new Grafo_t<T, K>(grafo.quantidadeNosGrafo());
-			Grafo::No* pontoInicial = grafo.nos[0];
-			double PesoArestaBuscar = 0.0;
-			std::vector<bool> noVisitado(grafo.quantidadeNosGrafo(), false);
-			No_t<T>* noAtual = pontoInicial;
-			auto* resultadoNoAtual = resultado->adicionarNo(noAtual->getValor());
-			auto* resultadoNoInicio = resultadoNoAtual;
-			noVisitado[noAtual->getId()] = true;
-
-			for (int i = 1; i < grafo.quantidadeNosGrafo(); i++) {
-				list<Aresta_t<K>*>* arestas = noAtual->getArestas();
-				double maiorPeso = -3.0;
-				Aresta_t<K>* arestaSelecionada = nullptr;
-
-				for (auto it2 = arestas->begin(); it2 != arestas->end(); it2++) {
-					Aresta_t<K>* aresta = *it2;
-
-					if (noVisitado[aresta->getNoFim()->getId()] == false && aresta->getPeso() > maiorPeso) {
-						maiorPeso = aresta->getPeso();
-						arestaSelecionada = aresta;
-					}
-
-				}
-
-				No_t<T>* noSelecionado = arestaSelecionada->getNoFim();
-				auto* resultadoNoSelecionado = resultado->adicionarNo(noSelecionado->getValor());
-				resultado->adicionarAresta(arestaSelecionada->getPeso(), resultadoNoAtual, resultadoNoSelecionado);
-
-				noAtual = noSelecionado;
-				resultadoNoAtual = resultadoNoSelecionado;
-
-				noVisitado[noAtual->getId()] = true;
-			}
-
-			for (auto it2 = noAtual->getArestas()->begin(); it2 != noAtual->getArestas()->end(); it2++) {
-				Aresta_t<K>* aresta = *it2;
-
-				if (aresta->getNoFim() == pontoInicial) {
-					PesoArestaBuscar = aresta->getPeso();
-				}
-
-			}
-
-			resultado->adicionarAresta(PesoArestaBuscar, resultadoNoAtual, resultadoNoInicio);
-
-			return resultado;
-		}
+		#endif
 
 
+
+		#if 0
 		Grafo_t<T, K>* CaixeiroVizinhoMaisProximo(Grafo_t<T, K>& grafo) {
 			using Grafo = Grafo_t<T, K>;
 
@@ -237,9 +209,73 @@ public:
 
 			return resultado;
 		}
-
+		#endif
 };
 
+
+template <typename T, typename K>
+Grafo_t<T, K>* CaixeiroInsercaoDoMaisDistante(Grafo_t<T, K>& grafo) {
+	using Grafo = Grafo_t<T, K>;
+
+	Grafo* resultado = new Grafo(grafo.quantidadeNosGrafo());
+	No_t<T>* pontoInicial = grafo.nos[0];
+	double PesoArestaBuscar = 0.0;
+	std::vector<bool> noVisitado(grafo.quantidadeNosGrafo(), false);
+	No_t<T>* noAtual = pontoInicial;
+	auto* resultadoNoAtual = resultado->adicionarNo(noAtual->getValor());
+	auto* resultadoNoInicio = resultadoNoAtual;
+	noVisitado[noAtual->getId()] = true;
+
+	dprintln("Iniciou pelo no: " << noAtual->getId());
+
+	for (int i = 1; i < grafo.quantidadeNosGrafo(); i++) {
+		list<Aresta_t<K>*>* arestas = noAtual->getArestas();
+		double maiorPeso = -3.0;
+		Aresta_t<K>* arestaSelecionada = nullptr;
+
+		for (auto it2 = arestas->begin(); it2 != arestas->end(); it2++) {
+			Aresta_t<K>* aresta = *it2;
+			if (aresta->getNoFim()->getId() != noAtual->getId()) {
+				dprintln("\tchecando no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
+
+					if (noVisitado[aresta->getNoFim()->getId()] == false && aresta->getPeso() > maiorPeso) {
+					maiorPeso = aresta->getPeso();
+					arestaSelecionada = aresta;
+				}
+			}
+		}
+
+		No_t<T>* noSelecionado = arestaSelecionada->getNoFim();
+
+		dprintln("proximo no: " << noSelecionado->getId())
+
+		assert(noSelecionado != noAtual);
+
+		auto* resultadoNoSelecionado = resultado->adicionarNo(noSelecionado->getValor());
+		resultado->adicionarAresta(arestaSelecionada->getPeso(), resultadoNoAtual, resultadoNoSelecionado);
+
+		noAtual = noSelecionado;
+		resultadoNoAtual = resultadoNoSelecionado;
+
+		noVisitado[noAtual->getId()] = true;
+	}
+
+	for (auto it2 = noAtual->getArestas()->begin(); it2 != noAtual->getArestas()->end(); it2++) {
+		Aresta_t<K>* aresta = *it2;
+
+		dprintln("\tchecando no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
+
+		if (aresta->getNoFim() == pontoInicial) {
+			PesoArestaBuscar = aresta->getPeso();
+			dprintln("\tchecando ultimo no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
+			break;
+		}
+
+	}
+
+	resultado->adicionarAresta(PesoArestaBuscar, resultadoNoAtual, resultadoNoInicio);
+	return resultado;
+}
 
 int main()
 {
@@ -275,6 +311,7 @@ int main()
 	grafo.adicionarAresta(2.0, no3, no4);
 	grafo.adicionarAresta(1.0, no4, no3);
 
+	auto* grafo2 = CaixeiroInsercaoDoMaisDistante<int, int>(grafo);
 
 	return 0;
 
