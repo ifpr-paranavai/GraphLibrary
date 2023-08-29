@@ -5,13 +5,13 @@ C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(45,
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(359,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(302,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo que está sendo compilada
           with
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(349,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(292,26): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(42,1): warning C4267: 'return': conversão de 'size_t' para 'int', possível perda de dados
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(41,1): message : ao compilar a função de membro 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo da classe
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(284,19): message : consulte a referência à instanciação 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp.cpp(173,19): message : consulte a referência à instanciação 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo que está sendo compilada
   GrafoLista.cpp.vcxproj -> C:\Users\andre\source\repos\GrafoLista.cpp\x64\Debug\GrafoLista.cpp.exe
