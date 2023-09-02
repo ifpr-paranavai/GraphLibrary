@@ -31,4 +31,5 @@ class Aresta_t {
 		double getPeso() {
 			return this->peso;
 		}
+
 };

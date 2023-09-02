@@ -51,6 +51,10 @@ class No_t {
 			return &this->arestas;
 		}
 
+		void removerAresta(Aresta_t<T>* aresta) {
+			this->arestas.remove(aresta);
+		}
+
 };
 #include "Aresta_t.h"
 #endif
