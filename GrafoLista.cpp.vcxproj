@@ -127,10 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AlgoritmoOtimo.cpp" />
     <ClCompile Include="GrafoLista.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlgoritmoOtimo.h" />
     <ClInclude Include="Aresta_t.h" />
     <ClInclude Include="Grafo.h" />
     <ClInclude Include="No_t.h" />

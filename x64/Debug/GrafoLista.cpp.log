@@ -1,2 +1,17 @@
-﻿  AlgoritmoOtimo.cpp
+﻿  GrafoLista.cpp
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(36,1): warning C4267: 'argumento': conversão de 'size_t' para 'const int', possível perda de dados
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(32,1): message : ao compilar a função de membro 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo da classe
+          with
+          [
+              T=int
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(179,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(T &)' do modelo que está sendo compilada
+          with
+          [
+              T=int
+          ]
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(169,50): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(29,1): warning C4267: 'return': conversão de 'size_t' para 'int', possível perda de dados
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(28,1): message : ao compilar a função de membro 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo da classe
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\AlgoritmoOtimo.h(25,17): message : consulte a referência à instanciação 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo que está sendo compilada
   GrafoLista.cpp.vcxproj -> C:\Users\andre\source\repos\GrafoLista.cpp\x64\Debug\GrafoLista.cpp.exe

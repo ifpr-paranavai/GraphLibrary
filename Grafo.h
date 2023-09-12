@@ -8,6 +8,7 @@
 #include "No_t.h"
 #include "Aresta_t.h"
 
+using namespace std;
 template <typename T, typename K>
 class Grafo_t {
 public:

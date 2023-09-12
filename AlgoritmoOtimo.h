@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <functional>
 #include <vector>
@@ -8,39 +9,26 @@
 #include "Aresta_t.h"
 #include "Grafo.h"
 
-#define DEBUG
-// ---------------------------
-
-
-#ifdef DEBUG
-	#define dprint(STR) { std::cout << STR; }
-	#define dprintln(STR) { std::cout << STR << std::endl; }
-#else
-	#define dprint(STR)
-	#define dprintln(STR)
-#endif
-
-
 template <typename T, typename K>
 class AlgoritmoOtimo {
-public:
-	Grafo_t<T, K>* melhorSolucao = new Grafo_t<T, K>();
-	double custoMelhorSolucao = DBL_MAX;
-	No_t<T>* pontoInicial = new No_t<T>();
+
+	public:
+		Grafo_t<T, K>* melhorSolucao;
+		double custoMelhorSolucao = DBL_MAX;
+		No_t<T>* pontoInicial;
 
 
-	Grafo_t<T, K> caixeiro(Grafo_t<T, K>* grafo) {
-		No_t<T> noAtual = grafo->nos[0];
-		this->pontoInicial = noAtual;
+		Grafo_t<T, K> caixeiro(Grafo_t<T, K>* grafo)
+		{
+			No_t<T>* noAtual = grafo->nos[0];
+			pontoInicial = noAtual;
+			vector<bool> noVisitado(grafo->quantidadeNosGrafo(), false);
+			noVisitado[noAtual->getId()] = true;
+			Grafo_t<T, K> caminho(grafo->quantidadeNosGrafo());
+			caminho.adicionarNo(noAtual->getValor());
+			return *melhorSolucao;
 
-		dprint("o ponto inicial é: " << this->pontoInicial->getId())
-		
-		vector<bool> noVisitado(grafo->quantidadeNosGrafo, false);
-		noVisitado[noAtual->getId()] = true;
-		Grafo_t<T, K> caminho = new Grafo_t<T, K>();
-		caminho.adicionarNo(noAtual);
-		caixeiroProximoNo(grafo, noAtual, noVisitado, caminho, 0.0, 1);
-	}
+		}
 
 	void caixeiroProximoNo(Grafo_t<T, K>* grafo, No_t<T>* noAtual, vector<bool>& nosVisitados, Grafo_t<T, K>* caminho, double custoAcumulado, int quantidadeNos) {
 		if (quantidadeNos == grafo->quantidadeNosGrafo()) {
@@ -48,7 +36,7 @@ public:
 			for (auto it2 = noAtual->getArestas()->begin(); it2 != noAtual->getArestas()->end(); it2++) {
 				Aresta_t<K>* aresta = *it2;
 
-				if (aresta->getNoFim() == this->pontoInicial) {
+				if (aresta->getNoFim() == pontoInicial) {
 					PesoArestaBuscar = aresta->getPeso();
 					break;
 				}
@@ -81,5 +69,4 @@ public:
 			}
 		}
 	}
-
 };
