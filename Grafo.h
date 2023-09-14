@@ -19,7 +19,7 @@ private:
 
 public:
 	//list< Aresta* > arestas;
-	vector< No* > nos;
+	vector< No_t<T>* > nos;
 	Grafo_t(int qtdeNos)
 	{
 		this->nos.reserve(qtdeNos);
@@ -39,7 +39,9 @@ public:
 	}
 
 	void removerNo(No_t<T>* noRemover) {
-		this->nos.erase(noRemover->getId());
+		auto it = std::find(this->nos.begin(), this->nos.end(), noRemover);
+
+		this->nos.erase(it);
 	}
 
 	No_t<T>* getNo(std::function<bool(No_t<T>&)> funcao) {
@@ -59,8 +61,8 @@ public:
 	}
 
 	void removerAresta(Aresta_t<K>* aresta) {
-		No_t<T>* noInicio = aresta->getNoInicio()->removerAresta(aresta);
-		No_t<T>* noFim = aresta->getNoFim()->removerAresta(aresta);
+		aresta->getNoInicio()->removerAresta(aresta);
+		aresta->getNoFim()->removerAresta(aresta);
 	}
 
 	bool verificarGrafoCompleto(Grafo_t<T, K>* grafo) {

@@ -52,7 +52,9 @@ class No_t {
 		}
 
 		void removerAresta(Aresta_t<T>* aresta) {
-			this->arestas.remove(aresta);
+			auto it = std::find(this->arestas.begin(), this->arestas.end(), aresta);
+
+			this->arestas.erase(it);
 		}
 
 };

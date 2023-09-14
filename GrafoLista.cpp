@@ -199,7 +199,21 @@ int main()
 
 	AlgoritmoOtimo<int, int> algoritmo;
 
-	algoritmo.caixeiro(grafo);
+	Grafo_t<int, int> grafo1 = Grafo_t<int, int>(grafo->quantidadeNosGrafo());
+	grafo1 = algoritmo.caixeiro(grafo);
+	/*
+	No_t<int>* noAtual = grafo1.nos[0];
+	
+	for (int i = 1; i < grafo1.quantidadeNosGrafo(); i++) {
+		list<Aresta_t<int>*>* arestas = noAtual->getArestas();
+		double maiorPeso = DBL_MAX;
+		Aresta_t<int>* arestaSelecionada = nullptr;
+		
+		for (auto it2 = arestas->begin(); it2 != arestas->end(); it2++) {
+			Aresta_t<int>* aresta = *it2;
+			dprintln("\tchecando no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
+		}
+	}*/
 
 	return 0;
 

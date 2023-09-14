@@ -24,8 +24,9 @@ class AlgoritmoOtimo {
 			pontoInicial = noAtual;
 			vector<bool> noVisitado(grafo->quantidadeNosGrafo(), false);
 			noVisitado[noAtual->getId()] = true;
-			Grafo_t<T, K> caminho(grafo->quantidadeNosGrafo());
-			caminho.adicionarNo(noAtual->getValor());
+			Grafo_t<T, K>* caminho = new Grafo_t<T, K>(grafo->quantidadeNosGrafo());
+			caminho->adicionarNo(noAtual->getValor());
+			caixeiroProximoNo(grafo, noAtual, noVisitado, caminho, 0, 1);
 			return *melhorSolucao;
 
 		}
@@ -49,16 +50,16 @@ class AlgoritmoOtimo {
 			}
 		}
 		else {
-			for (auto* it = noAtual->getArestas()->begin(); it != noAtual->getArestas()->end(); it++) {
+			for (auto it = noAtual->getArestas()->begin(); it != noAtual->getArestas()->end(); it++) {
 				Aresta_t<K>* aresta = *it;
 				if (aresta->getNoFim()->getId() != noAtual->getId()) {
 					No_t<T>* noDestino = aresta->getNoFim();
 
 					if (nosVisitados[noDestino->getId()] == false) {
 						nosVisitados[noDestino->getId()] = true;
-						caminho->adicionarNo(noDestino);
+						caminho->adicionarNo(noDestino->getValor());
 						caminho->adicionarAresta(aresta->getPeso(), aresta->getNoInicio(), aresta->getNoFim());
-						caixeiroProximoNo(*grafo, *noDestino, &nosVisitados, *caminho, custoAcumulado, quantidadeNos + 1);
+						caixeiroProximoNo(grafo, noDestino, nosVisitados, caminho, custoAcumulado, quantidadeNos + 1);
 
 						caminho->removerAresta(aresta);
 						caminho->removerNo(noDestino);
