@@ -8,6 +8,18 @@
 #include "No_t.h"
 #include "Aresta_t.h"
 
+#define DEBUG
+#define SANITY
+// ---------------------------------------------------
+
+#ifdef DEBUG
+	#define dprint(STR) { std::cout << STR; }
+	#define dprintln(STR) { std::cout << STR << std::endl; }
+#else
+	#define dprint(STR)
+	#define dprintln(STR)
+#endif
+
 using namespace std;
 template <typename T, typename K>
 class Grafo_t {
@@ -18,7 +30,6 @@ private:
 
 
 public:
-	//list< Aresta* > arestas;
 	vector< No_t<T>* > nos;
 	Grafo_t(int qtdeNos)
 	{
@@ -40,8 +51,17 @@ public:
 
 	void removerNo(No_t<T>* noRemover) {
 		auto it = std::find(this->nos.begin(), this->nos.end(), noRemover);
+		
+		this->nos.erase(it - 1);
 
-		this->nos.erase(it);
+		for (auto& outroNo : this->nos) {
+			auto arestas = outroNo->getArestas();
+			arestas->remove_if([noRemover](Aresta_t<K>* aresta) {
+				return aresta->getNoInicio() == noRemover || aresta->getNoFim() == noRemover;
+				});
+		}
+
+		//delete noRemover;
 	}
 
 	No_t<T>* getNo(std::function<bool(No_t<T>&)> funcao) {

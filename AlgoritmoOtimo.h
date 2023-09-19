@@ -9,6 +9,19 @@
 #include "Aresta_t.h"
 #include "Grafo.h"
 
+
+#define DEBUG
+#define SANITY
+// ---------------------------------------------------
+
+#ifdef DEBUG
+	#define dprint(STR) { std::cout << STR; }
+	#define dprintln(STR) { std::cout << STR << std::endl; }
+#else
+	#define dprint(STR)
+	#define dprintln(STR)
+#endif
+
 template <typename T, typename K>
 class AlgoritmoOtimo {
 
@@ -61,9 +74,9 @@ class AlgoritmoOtimo {
 						caminho->adicionarAresta(aresta->getPeso(), aresta->getNoInicio(), aresta->getNoFim());
 						caixeiroProximoNo(grafo, noDestino, nosVisitados, caminho, custoAcumulado, quantidadeNos + 1);
 
+						nosVisitados[noDestino->getId()] = false;
 						caminho->removerAresta(aresta);
 						caminho->removerNo(noDestino);
-						nosVisitados[noDestino->getId()] = false;
 					}
 
 				}
