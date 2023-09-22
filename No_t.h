@@ -44,6 +44,8 @@ class No_t {
 
 		void adicionarAresta(Aresta_t<T>* aresta)
 		{
+			assert(aresta->getNoInicio() == this);
+			assert(aresta->getNoFim() != this);
 			this->arestas.push_back(aresta);
 		}
 
@@ -53,7 +55,7 @@ class No_t {
 
 		void removerAresta(Aresta_t<T>* aresta) {
 			auto it = std::find(this->arestas.begin(), this->arestas.end(), aresta);
-
+			assert(it != this->arestas.end());
 			this->arestas.erase(it);
 		}
 

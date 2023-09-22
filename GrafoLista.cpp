@@ -183,37 +183,31 @@ int main()
 
 	// Adicionando as arestas
 	grafo->adicionarAresta(10.0, no1, no2);
-	grafo->adicionarAresta(15.0, no2, no1);
 	grafo->adicionarAresta(20.0, no1, no3);
-	grafo->adicionarAresta(25.0, no3, no1);
 	grafo->adicionarAresta(12.0, no1, no4);
-	grafo->adicionarAresta(18.0, no4, no1);
 	grafo->adicionarAresta(22.0, no2, no3);
-	grafo->adicionarAresta(8.0, no3, no2);
 	grafo->adicionarAresta(13.0, no2, no4);
-	grafo->adicionarAresta(17.0, no4, no2);
 	grafo->adicionarAresta(2.0, no3, no4);
-	grafo->adicionarAresta(1.0, no4, no3);
 
-	//auto* grafo2 = CaixeiroInsercaoDoMaisDistante(grafo);
+	//CaixeiroVizinhoMaisProximo(*grafo);
 
 	AlgoritmoOtimo<int, int> algoritmo;
 
 	Grafo_t<int, int> grafo1 = Grafo_t<int, int>(grafo->quantidadeNosGrafo());
 	grafo1 = algoritmo.caixeiro(grafo);
-	/*
-	No_t<int>* noAtual = grafo1.nos[0];
-	
-	for (int i = 1; i < grafo1.quantidadeNosGrafo(); i++) {
-		list<Aresta_t<int>*>* arestas = noAtual->getArestas();
-		double maiorPeso = DBL_MAX;
-		Aresta_t<int>* arestaSelecionada = nullptr;
-		
-		for (auto it2 = arestas->begin(); it2 != arestas->end(); it2++) {
-			Aresta_t<int>* aresta = *it2;
-			dprintln("\tchecando no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
-		}
-	}*/
+	///*
+	//No_t<int>* noAtual = grafo1.nos[0];
+	//
+	//for (int i = 1; i < grafo1.quantidadeNosGrafo(); i++) {
+	//	list<Aresta_t<int>*>* arestas = noAtual->getArestas();
+	//	double maiorPeso = DBL_MAX;
+	//	Aresta_t<int>* arestaSelecionada = nullptr;
+	//	
+	//	for (auto it2 = arestas->begin(); it2 != arestas->end(); it2++) {
+	//		Aresta_t<int>* aresta = *it2;
+	//		dprintln("\tchecando no " << aresta->getNoFim()->getId() << " peso " << aresta->getPeso())
+	//	}
+	//}*/
 
 	return 0;
 

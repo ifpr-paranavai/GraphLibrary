@@ -51,17 +51,8 @@ public:
 
 	void removerNo(No_t<T>* noRemover) {
 		auto it = std::find(this->nos.begin(), this->nos.end(), noRemover);
-		
-		this->nos.erase(it - 1);
-
-		for (auto& outroNo : this->nos) {
-			auto arestas = outroNo->getArestas();
-			arestas->remove_if([noRemover](Aresta_t<K>* aresta) {
-				return aresta->getNoInicio() == noRemover || aresta->getNoFim() == noRemover;
-				});
-		}
-
-		//delete noRemover;
+		assert(it != this->nos.end());
+		this->nos.erase(it);
 	}
 
 	No_t<T>* getNo(std::function<bool(No_t<T>&)> funcao) {
@@ -77,7 +68,7 @@ public:
 		Aresta_t<K>* aresta = new Aresta_t<K>(peso, noInicio, noFim);
 		noInicio->adicionarAresta(aresta);
 		Aresta_t<K>* arestaInvertida = new Aresta_t<K>(peso, noFim, noInicio);
-		noFim->adicionarAresta(aresta);
+		noFim->adicionarAresta(arestaInvertida);
 	}
 
 	void removerAresta(Aresta_t<K>* aresta) {
