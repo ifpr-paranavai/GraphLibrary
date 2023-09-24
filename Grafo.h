@@ -40,7 +40,7 @@ public:
 		return this->nos.size();
 	}
 
-	No_t<T>* adicionarNo(T& valor) {
+	No_t<T>* adicionarNo(const T& valor) {
 		if (this->nos.size() == this->nos.capacity()) {
 			throw std::runtime_error("Alocação maior do que reservada");
 		}
