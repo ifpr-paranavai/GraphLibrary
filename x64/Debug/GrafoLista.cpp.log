@@ -1,17 +1,19 @@
 ﻿  GrafoLista.cpp
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(198,22): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(276,77): message : consulte a referência à instanciação 'Grafo_t<int,int> *gerarGrafoInteirosAleatorio<int,int>(int)' do modelo que está sendo compilada
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(47,1): warning C4267: 'argumento': conversão de 'size_t' para 'const int', possível perda de dados
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(43,1): message : ao compilar a função de membro 'No_t<T> *Grafo_t<T,int>::adicionarNo(const T &)' do modelo da classe
           with
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(234,17): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(const T &)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(209,21): message : consulte a referência à instanciação 'No_t<T> *Grafo_t<T,int>::adicionarNo(const T &)' do modelo que está sendo compilada
           with
           [
               T=int
           ]
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(231,50): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(284,103): message : consulte a referência à instanciação 'Grafo_t<int,int>' do modelo da classe que está sendo compilada
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(40,1): warning C4267: 'return': conversão de 'size_t' para 'int', possível perda de dados
 C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\Grafo.h(39,1): message : ao compilar a função de membro 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo da classe
-C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(96,19): message : consulte a referência à instanciação 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo que está sendo compilada
+C:\Users\andre\source\repos\GrafoLista.cpp\GrafoLista.cpp\GrafoLista.cpp(33,19): message : consulte a referência à instanciação 'int Grafo_t<int,int>::quantidadeNosGrafo(void)' do modelo que está sendo compilada
   GrafoLista.cpp.vcxproj -> C:\Users\andre\source\repos\GrafoLista.cpp\x64\Debug\GrafoLista.cpp.exe

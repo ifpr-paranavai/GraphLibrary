@@ -30,23 +30,6 @@ class AlgoritmoOtimo {
 		double custoMelhorSolucao = DBL_MAX;
 		No_t<T>* pontoInicial;
 
-
-		//void caixeiro(Grafo_t<T, K>* grafo)
-		//{
-		//	No_t<T>* noAtual = grafo->nos[0];
-		//	this->pontoInicial = noAtual;
-		//	vector<int> nosSolucao;
-		//	nosSolucao.reserve(grafo->quantidadeNosGrafo());
-		//	vector<bool> noVisitado(grafo->quantidadeNosGrafo(), false);
-		//	noVisitado[noAtual->getId()] = true;
-		//	Grafo_t<T, K>* caminho = new Grafo_t<T, K>(grafo->quantidadeNosGrafo());
-		//	nosSolucao.push_back(noAtual->getId());
-		//	caixeiroProximoNo(grafo, noAtual, noVisitado, nosSolucao, 0, 1);
-		//	dprintln("MELHOR CUSTO: " << this->custoMelhorSolucao);
-		//	//return *melhorSolucao;
-
-		//}
-
 		void caixeiro(Grafo_t<T, K>* grafo)
 		{
 			vector<int> nosSolucao;
@@ -64,8 +47,6 @@ class AlgoritmoOtimo {
 			}
 
 			dprintln("MELHOR CUSTO: " << this->custoMelhorSolucao);
-			//return *melhorSolucao;
-
 		}
 
 	void caixeiroProximoNo(Grafo_t<T, K>* grafo, No_t<T>* noAtual, vector<bool>& nosVisitados, vector<int>& nosSolucao, double custoAcumulado, int quantidadeNos) {

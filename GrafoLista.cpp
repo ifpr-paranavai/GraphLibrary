@@ -4,6 +4,8 @@
 #include <list>
 #include <algorithm>
 #include <cassert>
+#include <stdlib.h>
+#include <time.h>
 #include "No_t.h"
 #include "Aresta_t.h"
 #include "Grafo.h"
@@ -49,10 +51,10 @@ Grafo_t<T, K>* CaixeiroInsercaoDoMaisDistante(Grafo_t<T, K>& grafo) {
 			if (aresta->getNoFim()->getId() != noAtual->getId()) {
 				dprintln("\tchecando no " << aresta->getNoFim()->getValor() << " peso " << aresta->getPeso())
 
-					if (noVisitado[aresta->getNoFim()->getId()] == false && aresta->getPeso() > maiorPeso) {
-						maiorPeso = aresta->getPeso();
-						arestaSelecionada = aresta;
-					}
+				if (noVisitado[aresta->getNoFim()->getId()] == false && aresta->getPeso() > maiorPeso) {
+					maiorPeso = aresta->getPeso();
+					arestaSelecionada = aresta;
+				}
 			}
 		}
 
@@ -154,38 +156,6 @@ Grafo_t<T, K>* CaixeiroVizinhoMaisProximo(Grafo_t<T, K>& grafo) {
 	return resultado;
 }
 
-//template <typename T, typename K>
-//void imprimirGrafo(Grafo_t<T, K>* grafo) {
-//	No_t<T>* noInicial = grafo->nos[0];
-//	No_t<T>* noAtual = noInicial;
-//
-//	dprint(noAtual->getId() << ", ");
-//
-//	No_t<T>* noAnterior = noAtual;
-//	auto* arestas = noAtual->getArestas();
-//	assert(arestas->size() == 4);
-//	Aresta_t<K>* aresta = arestas->front();
-//	noAtual = aresta->getNoFim();
-//
-//	while(noAtual != noInicial) {
-//		dprint(noAtual->getId() << ", ");
-//		arestas = noAtual->getArestas();
-//		assert(arestas->size() == 4);
-//		aresta = arestas->front();
-//		if (aresta->getNoFim() != noAnterior) {
-//			noAnterior = noAtual;
-//			noAtual = aresta->getNoFim();
-//		}
-//		else {
-//			aresta = arestas->back();
-//			assert(aresta->getNoFim() != noAnterior);
-//			noAnterior = noAtual;
-//			noAtual = aresta->getNoFim();
-//		}
-//	}
-//
-//}
-
 template <typename T, typename K>
 void imprimirGrafo_(Grafo_t<T, K>* grafo, vector<bool>& nosVisitados, No_t<T>* noAtual, double& custoAcumulado, No_t<T>** ultimoNo) {
 	assert(noAtual->getArestas()->size() == 2);
@@ -222,42 +192,95 @@ void imprimirGrafo(Grafo_t<T, K>* grafo) {
 	dprintln("    custo acumulado: " << custoAcumulado);
 }
 
+template <typename T, typename K>
+Grafo_t<T, K>* gerarGrafoInteirosAleatorio(int numeroNos) {
+	
+	std::srand(std::time(0));
+
+	double lower_bound = 0;
+	double upper_bound = 100;
+
+
+
+	Grafo_t<T, K>* grafo = new Grafo_t<T, K>(numeroNos);
+	No_t<T>* noAnterior = nullptr;
+	for (int i = 0; i < numeroNos; i++) {
+		int valorAleatorio = i;
+		grafo->adicionarNo(valorAleatorio);
+	}
+
+	for (int i = 0; i < numeroNos-1; i++) {
+		No_t<T>* noInicial = grafo->nos[i];
+
+		for (int j = 1; j < numeroNos; j++) {
+			int random_integer = std::rand();
+			double random_double = lower_bound + (upper_bound - lower_bound) * (static_cast<double>(random_integer) / RAND_MAX);
+			double pesoAleatorio = random_double;
+			No_t<T>* noFinal = grafo->nos[j];
+			Aresta_t<T>* aresta = new Aresta_t<T>(pesoAleatorio, noInicial, noFinal);
+			if (noAnterior == nullptr || noFinal != noAnterior && noFinal != noInicial) {
+				grafo->adicionarAresta(pesoAleatorio, noInicial, noFinal);
+			}
+		}
+		noAnterior = noInicial;
+	}
+
+	return grafo;
+
+}
+
 
 int main()
 {
 	setlocale(LC_ALL, "pt_BR.UTF-8");
 
-	//// Criando um grafo
-	Grafo_t<int, int>* grafo = new Grafo_t<int, int>(4);
+	////// Criando um grafo
+	//Grafo_t<int, int>* grafo = new Grafo_t<int, int>(5);
 
-	// Adicionando os nós
-	No_t<int>* no1 = grafo->adicionarNo(0);
-	No_t<int>* no2 = grafo->adicionarNo(1);
-	No_t<int>* no3 = grafo->adicionarNo(2);
-	No_t<int>* no4 = grafo->adicionarNo(3);
+	//// Adicionando os nós
+	//No_t<int>* no1 = grafo->adicionarNo(1);
+	//No_t<int>* no2 = grafo->adicionarNo(2);
+	//No_t<int>* no3 = grafo->adicionarNo(3);
+	//No_t<int>* no4 = grafo->adicionarNo(4);
+	//No_t<int>* no5 = grafo->adicionarNo(5);
 
-	// Adicionando as arestas
-	grafo->adicionarAresta(10.0, no1, no2);
-	grafo->adicionarAresta(20.0, no1, no3);
-	grafo->adicionarAresta(12.0, no1, no4);
-	grafo->adicionarAresta(22.0, no2, no3);
-	grafo->adicionarAresta(13.0, no2, no4);
-	grafo->adicionarAresta(2.0, no3, no4);
 
-	Grafo_t<int, int>* grafoVizinhoMaisProximo = CaixeiroVizinhoMaisProximo(*grafo);
+	//// Adicionando as arestas
+	//grafo->adicionarAresta(1.0, no1, no2);
+	//grafo->adicionarAresta(20.0, no1, no3);
+	//grafo->adicionarAresta(6.0, no1, no4);
+	//grafo->adicionarAresta(15.0, no1, no5);
+	//grafo->adicionarAresta(10.0, no2, no3);
+	//grafo->adicionarAresta(7.0, no2, no4);
+	//grafo->adicionarAresta(35.0, no2, no5);
+	//grafo->adicionarAresta(30.0, no3, no4);
+	//grafo->adicionarAresta(20.0, no3, no5);
+	//grafo->adicionarAresta(10.0, no4, no5);
 
-	dprint("Grafo vizinho mais próximo: ");
-	imprimirGrafo(grafoVizinhoMaisProximo);
+	//Grafo_t<int, int>* grafoVizinhoMaisProximo = CaixeiroVizinhoMaisProximo(*grafo);
 
-	Grafo_t<int, int>* grafoVizinhoMaisDistante = CaixeiroInsercaoDoMaisDistante(*grafo);
-	
-	dprint("Grafo vizinho mais distante: ");
-	imprimirGrafo(grafoVizinhoMaisDistante);
+	//dprint("Grafo vizinho mais próximo: ");
+	//imprimirGrafo(grafoVizinhoMaisProximo);
 
-	AlgoritmoOtimo<int, int> algoritmo;
+	//Grafo_t<int, int>* grafoVizinhoMaisDistante = CaixeiroInsercaoDoMaisDistante(*grafo);
+	//
+	//dprint("Grafo vizinho mais distante: ");
+	//imprimirGrafo(grafoVizinhoMaisDistante);
+
+	//AlgoritmoOtimo<int, int> algoritmo;
 
 	//Grafo_t<int, int> grafo1 = Grafo_t<int, int>(grafo->quantidadeNosGrafo());
 	//algoritmo.caixeiro(grafo);
+
+	Grafo_t<int, int>* grafoAleatorio = gerarGrafoInteirosAleatorio<int, int>(4);
+	
+
+	//dprintln("Aleatorio: " << numeroAleatorio);
+
+	//imprimirGrafo(grafoAleatorio);
+
+	
+	Grafo_t<int, int>* grafoVizinhoMaisDistanteAleatorio = CaixeiroInsercaoDoMaisDistante(*grafoAleatorio);
 
 	return 0;
 
