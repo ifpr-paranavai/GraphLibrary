@@ -200,15 +200,15 @@ Grafo_t<T, K>* gerarGrafoInteirosAleatorio(int numeroNos) {
 	double lower_bound = 0;
 	double upper_bound = 100;
 
-
-
 	Grafo_t<T, K>* grafo = new Grafo_t<T, K>(numeroNos);
 	No_t<T>* noAnterior = nullptr;
+
 	for (int i = 0; i < numeroNos; i++) {
 		int valorAleatorio = i;
 		grafo->adicionarNo(valorAleatorio);
 	}
 
+	vector<bool> noVisitado(grafo->quantidadeNosGrafo(), false);
 	for (int i = 0; i < numeroNos-1; i++) {
 		No_t<T>* noInicial = grafo->nos[i];
 
@@ -218,11 +218,13 @@ Grafo_t<T, K>* gerarGrafoInteirosAleatorio(int numeroNos) {
 			double pesoAleatorio = random_double;
 			No_t<T>* noFinal = grafo->nos[j];
 			Aresta_t<T>* aresta = new Aresta_t<T>(pesoAleatorio, noInicial, noFinal);
-			if (noAnterior == nullptr || noFinal != noAnterior && noFinal != noInicial) {
+
+			if (!(noVisitado[noFinal->getId()]) && (noFinal != noAnterior && noFinal != noInicial)) {
 				grafo->adicionarAresta(pesoAleatorio, noInicial, noFinal);
 			}
 		}
-		noAnterior = noInicial;
+		noVisitado[noInicial->getId()] = true;
+		//noAnterior = noInicial;
 	}
 
 	return grafo;
@@ -272,13 +274,7 @@ int main()
 	//Grafo_t<int, int> grafo1 = Grafo_t<int, int>(grafo->quantidadeNosGrafo());
 	//algoritmo.caixeiro(grafo);
 
-	Grafo_t<int, int>* grafoAleatorio = gerarGrafoInteirosAleatorio<int, int>(4);
-	
-
-	//dprintln("Aleatorio: " << numeroAleatorio);
-
-	//imprimirGrafo(grafoAleatorio);
-
+	Grafo_t<int, int>* grafoAleatorio = gerarGrafoInteirosAleatorio<int, int>(10);
 	
 	Grafo_t<int, int>* grafoVizinhoMaisDistanteAleatorio = CaixeiroInsercaoDoMaisDistante(*grafoAleatorio);
 
