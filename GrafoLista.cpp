@@ -224,7 +224,7 @@ Grafo_t<T, K>* gerarGrafoInteirosAleatorio(int numeroNos) {
 			}
 		}
 		noVisitado[noInicial->getId()] = true;
-		//noAnterior = noInicial;
+		noAnterior = noInicial;
 	}
 
 	return grafo;
